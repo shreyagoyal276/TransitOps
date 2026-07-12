@@ -1,37 +1,13 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
-
-    name: {
-        type: String,
-        required: true
-    },
-
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true
-    },
-
-    password: {
-        type: String,
-        required: true
-    },
-
-    role: {
-        type: String,
-        enum: [
-            "fleet_manager",
-            "dispatcher",
-            "safety_officer",
-            "financial_analyst"
-        ],
-        required: true
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log("MongoDB Atlas Connected");
+    } catch (error) {
+        console.error(error);
+        process.exit(1);
     }
+};
 
-}, {
-    timestamps: true
-});
-
-module.exports = mongoose.model("User", userSchema);
+module.exports = connectDB;
