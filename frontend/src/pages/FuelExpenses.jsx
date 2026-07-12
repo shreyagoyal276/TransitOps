@@ -1,182 +1,144 @@
-import DashboardLayout from "../layouts/DashboardLayout";
+import Card from "../components/Card";
+import KPIBox from "../components/KPIBox";
+import Table from "../components/Table";
 
-export default function FuelExpenses() {
+import {
 
-    return (
+    Fuel,
 
-        <DashboardLayout>
+    IndianRupee,
 
-            <div className="flex justify-between items-center mb-6">
+    TrendingUp,
 
-                <h1 className="text-3xl font-bold">
+    Wallet
 
-                    Fuel & Expenses
+} from "lucide-react";
 
-                </h1>
+export default function FuelExpenses(){
 
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg">
+    const data=[
 
-                    + Add Fuel Log
+        {
 
-                </button>
+            Vehicle:"Tata Ace",
 
-            </div>
+            Fuel:"65 L",
 
-            {/* Search */}
+            Cost:"₹5400",
 
-            <div className="bg-white rounded-xl shadow p-4 mb-6 flex gap-4">
+            Mileage:"16 km/L"
 
-                <input
-                    type="text"
-                    placeholder="Search Vehicle..."
-                    className="flex-1 border rounded-lg px-4 py-2"
+        },
+
+        {
+
+            Vehicle:"Ashok Leyland",
+
+            Fuel:"110 L",
+
+            Cost:"₹9200",
+
+            Mileage:"13 km/L"
+
+        },
+
+        {
+
+            Vehicle:"Eicher Pro",
+
+            Fuel:"80 L",
+
+            Cost:"₹6800",
+
+            Mileage:"15 km/L"
+
+        }
+
+    ];
+
+    return(
+
+        <>
+
+            <h1 className="text-3xl font-bold mb-6">
+
+                Fuel & Expenses
+
+            </h1>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+                <KPIBox
+
+                    title="Fuel Used"
+
+                    value="2560 L"
+
+                    icon={<Fuel size={34}/>}
+
                 />
 
-                <select className="border rounded-lg px-4 py-2">
+                <KPIBox
 
-                    <option>All Months</option>
-                    <option>January</option>
-                    <option>February</option>
-                    <option>March</option>
-                    <option>April</option>
+                    title="Fuel Cost"
 
-                </select>
+                    value="₹2.6 L"
+
+                    icon={<IndianRupee size={34}/>}
+
+                    color="text-green-600"
+
+                />
+
+                <KPIBox
+
+                    title="Average Mileage"
+
+                    value="15 km/L"
+
+                    icon={<TrendingUp size={34}/>}
+
+                    color="text-orange-600"
+
+                />
+
+                <KPIBox
+
+                    title="Monthly Expense"
+
+                    value="₹4.8 L"
+
+                    icon={<Wallet size={34}/>}
+
+                    color="text-red-600"
+
+                />
 
             </div>
 
-            {/* Fuel Table */}
+            <Card className="mt-8">
 
-            <div className="bg-white rounded-xl shadow overflow-hidden">
+                <Table
 
-                <table className="w-full">
+                    columns={[
 
-                    <thead className="bg-gray-100">
+                        "Vehicle",
 
-                        <tr>
+                        "Fuel",
 
-                            <th className="text-left p-4">Date</th>
+                        "Cost",
 
-                            <th>Vehicle</th>
+                        "Mileage"
 
-                            <th>Driver</th>
+                    ]}
 
-                            <th>Fuel (L)</th>
+                    data={data}
 
-                            <th>Amount</th>
+                />
 
-                            <th>Mileage</th>
+            </Card>
 
-                            <th>Actions</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        <tr className="border-b hover:bg-gray-50">
-
-                            <td className="p-4">12 Jul 2026</td>
-
-                            <td>MH12AB1234</td>
-
-                            <td>Raj Sharma</td>
-
-                            <td>65 L</td>
-
-                            <td>₹6,240</td>
-
-                            <td>14 km/L</td>
-
-                            <td>
-
-                                <button className="text-blue-600 mr-3">
-
-                                    Edit
-
-                                </button>
-
-                                <button className="text-red-600">
-
-                                    Delete
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                        <tr className="border-b hover:bg-gray-50">
-
-                            <td className="p-4">10 Jul 2026</td>
-
-                            <td>DL10XY5678</td>
-
-                            <td>Amit Kumar</td>
-
-                            <td>42 L</td>
-
-                            <td>₹4,020</td>
-
-                            <td>16 km/L</td>
-
-                            <td>
-
-                                <button className="text-blue-600 mr-3">
-
-                                    Edit
-
-                                </button>
-
-                                <button className="text-red-600">
-
-                                    Delete
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                        <tr className="hover:bg-gray-50">
-
-                            <td className="p-4">08 Jul 2026</td>
-
-                            <td>RJ20CD9087</td>
-
-                            <td>Neha Jain</td>
-
-                            <td>80 L</td>
-
-                            <td>₹7,760</td>
-
-                            <td>12 km/L</td>
-
-                            <td>
-
-                                <button className="text-blue-600 mr-3">
-
-                                    Edit
-
-                                </button>
-
-                                <button className="text-red-600">
-
-                                    Delete
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </DashboardLayout>
+        </>
 
     );
 

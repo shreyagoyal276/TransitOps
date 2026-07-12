@@ -1,162 +1,120 @@
-import DashboardLayout from "../layouts/DashboardLayout";
+import Card from "../components/Card";
+import Button from "../components/Button";
+import Input from "../components/Input";
 
 export default function Settings() {
 
     return (
 
-        <DashboardLayout>
+        <>
 
-            <h1 className="text-3xl font-bold mb-6">
+            <h1 className="text-3xl font-bold mb-8">
 
                 Settings
 
             </h1>
 
-            <div className="grid grid-cols-2 gap-6">
+            <Card title="Company Information">
 
-                {/* Company Information */}
+                <Input
 
-                <div className="bg-white rounded-xl shadow p-6">
+                    label="Company Name"
 
-                    <h2 className="text-xl font-semibold mb-5">
+                    value="TransitOps Pvt Ltd"
 
-                        Company Information
+                />
 
-                    </h2>
+                <Input
 
-                    <div className="space-y-4">
+                    label="Email"
 
-                        <div>
+                    value="info@transitops.com"
 
-                            <label className="block mb-1 font-medium">
+                />
 
-                                Company Name
+                <Input
 
-                            </label>
+                    label="Phone"
 
-                            <input
-                                type="text"
-                                defaultValue="TransitOps Pvt Ltd"
-                                className="w-full border rounded-lg px-4 py-2"
-                            />
+                    value="+91 9876543210"
 
-                        </div>
+                />
 
-                        <div>
+                <Button className="w-auto mt-4">
 
-                            <label className="block mb-1 font-medium">
+                    Save Changes
 
-                                Email
+                </Button>
 
-                            </label>
+            </Card>
 
-                            <input
-                                type="email"
-                                defaultValue="admin@transitops.com"
-                                className="w-full border rounded-lg px-4 py-2"
-                            />
+            <Card
 
-                        </div>
+                title="System Preferences"
 
-                        <div>
+                className="mt-8"
 
-                            <label className="block mb-1 font-medium">
+            >
 
-                                Contact Number
+                <div className="space-y-4">
 
-                            </label>
+                    <label>
 
-                            <input
-                                type="text"
-                                defaultValue="+91 9876543210"
-                                className="w-full border rounded-lg px-4 py-2"
-                            />
+                        <input
 
-                        </div>
+                            type="checkbox"
 
-                    </div>
+                            defaultChecked
 
-                </div>
+                        />
 
-                {/* Preferences */}
-
-                <div className="bg-white rounded-xl shadow p-6">
-
-                    <h2 className="text-xl font-semibold mb-5">
-
-                        Preferences
-
-                    </h2>
-
-                    <div className="space-y-5">
-
-                        <label className="flex items-center justify-between">
+                        <span className="ml-3">
 
                             Email Notifications
 
-                            <input type="checkbox" defaultChecked />
+                        </span>
 
-                        </label>
+                    </label>
 
-                        <label className="flex items-center justify-between">
+                    <label>
 
-                            SMS Notifications
+                        <input
 
-                            <input type="checkbox" />
+                            type="checkbox"
 
-                        </label>
+                            defaultChecked
 
-                        <label className="flex items-center justify-between">
+                        />
 
-                            Auto Trip Assignment
+                        <span className="ml-3">
 
-                            <input type="checkbox" defaultChecked />
+                            Auto Backup
 
-                        </label>
+                        </span>
 
-                        <label className="flex items-center justify-between">
+                    </label>
 
-                            Maintenance Alerts
+                    <label>
 
-                            <input type="checkbox" defaultChecked />
+                        <input
 
-                        </label>
+                            type="checkbox"
 
-                    </div>
+                        />
 
-                </div>
+                        <span className="ml-3">
 
-            </div>
+                            Dark Mode
 
-            {/* Account */}
+                        </span>
 
-            <div className="bg-white rounded-xl shadow p-6 mt-6">
-
-                <h2 className="text-xl font-semibold mb-5">
-
-                    Account
-
-                </h2>
-
-                <div className="flex gap-4">
-
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg">
-
-                        Save Changes
-
-                    </button>
-
-                    <button className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg">
-
-                        Logout
-
-                    </button>
+                    </label>
 
                 </div>
 
-            </div>
+            </Card>
 
-        </DashboardLayout>
+        </>
 
     );
 

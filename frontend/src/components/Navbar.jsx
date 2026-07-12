@@ -1,38 +1,61 @@
-import { Bell, Search } from "lucide-react";
+import {
 
-export default function Navbar() {
-  return (
-    <header className="bg-white h-16 shadow flex justify-between items-center px-8">
+    Bell,
 
-      <h2 className="text-xl font-bold">
-        Fleet Dashboard
-      </h2>
+    Settings
 
-      <div className="flex items-center gap-6">
+} from "lucide-react";
 
-        <div className="relative">
+import { useContext } from "react";
 
-          <Search
-            className="absolute left-3 top-3"
-            size={18}
-          />
+import { AuthContext } from "../context/AuthContext";
 
-          <input
-            placeholder="Search..."
-            className="border rounded-lg pl-10 py-2 pr-4"
-          />
+export default function Navbar(){
 
-        </div>
+    const { user } = useContext(AuthContext);
 
-        <Bell />
+    return(
 
-        <img
-          src="https://i.pravatar.cc/40"
-          className="rounded-full"
-        />
+        <header className="bg-white h-16 border-b shadow-sm px-8 flex justify-between items-center">
 
-      </div>
+            <div>
 
-    </header>
-  );
+                <h2 className="text-2xl font-bold">
+
+                    Welcome,
+
+                    {user?.name}
+
+                </h2>
+
+                <p className="text-gray-500 capitalize">
+
+                    {user?.role?.replaceAll("_"," ")}
+
+                </p>
+
+            </div>
+
+            <div className="flex items-center gap-6">
+
+                <Bell className="cursor-pointer"/>
+
+                <Settings className="cursor-pointer"/>
+
+                <img
+
+                    src={`https://ui-avatars.com/api/?name=${user?.name}&background=2563eb&color=fff`}
+
+                    className="rounded-full w-10"
+
+                    alt="User"
+
+                />
+
+            </div>
+
+        </header>
+
+    );
+
 }

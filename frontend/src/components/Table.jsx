@@ -1,53 +1,91 @@
 export default function Table({
-  columns,
-  data,
+
+    columns,
+
+    data
+
 }) {
-  return (
-    <table className="w-full border-collapse">
 
-      <thead>
+    return (
 
-        <tr className="bg-gray-100">
+        <div className="overflow-x-auto">
 
-          {columns.map((col) => (
-            <th
-              key={col}
-              className="text-left p-3"
-            >
-              {col}
-            </th>
-          ))}
+            <table className="w-full">
 
-        </tr>
+                <thead>
 
-      </thead>
+                    <tr className="bg-gray-100">
 
-      <tbody>
+                        {
 
-        {data.map((row, index) => (
+                            columns.map((col)=>(
 
-          <tr
-            key={index}
-            className="border-b hover:bg-gray-50"
-          >
+                                <th
 
-            {Object.values(row).map((cell, i) => (
+                                    key={col}
 
-              <td
-                key={i}
-                className="p-3"
-              >
-                {cell}
-              </td>
+                                    className="text-left p-4 font-semibold"
 
-            ))}
+                                >
 
-          </tr>
+                                    {col}
 
-        ))}
+                                </th>
 
-      </tbody>
+                            ))
 
-    </table>
-  );
+                        }
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {
+
+                        data.map((row,index)=>(
+
+                            <tr
+
+                                key={index}
+
+                                className="border-b hover:bg-gray-50"
+
+                            >
+
+                                {
+
+                                    columns.map((col)=>(
+
+                                        <td
+
+                                            key={col}
+
+                                            className="p-4"
+
+                                        >
+
+                                            {row[col]}
+
+                                        </td>
+
+                                    ))
+
+                                }
+
+                            </tr>
+
+                        ))
+
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    );
+
 }

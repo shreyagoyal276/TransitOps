@@ -1,7 +1,34 @@
-export default function Card({ children, className = "" }) {
+export default function Card({
+  title,
+  subtitle,
+  children,
+  className = "",
+}) {
   return (
-    <div className={`bg-white rounded-xl shadow p-6 ${className}`}>
+    <div className={`bg-white rounded-2xl shadow-sm border border-gray-200 p-6 ${className}`}>
+
+      {(title || subtitle) && (
+
+        <div className="mb-5">
+
+          {title && (
+            <h2 className="text-xl font-bold">
+              {title}
+            </h2>
+          )}
+
+          {subtitle && (
+            <p className="text-gray-500 mt-1">
+              {subtitle}
+            </p>
+          )}
+
+        </div>
+
+      )}
+
       {children}
+
     </div>
   );
 }

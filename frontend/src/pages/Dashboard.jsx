@@ -1,20 +1,29 @@
 import { useEffect, useState } from "react";
 
+import {
+    Truck,
+    Users,
+    Route,
+    Activity
+} from "lucide-react";
+
+import Card from "../components/Card";
 import KPIBox from "../components/KPIBox";
+import Table from "../components/Table";
 
 import { getCurrentUser } from "../services/authService";
 
 export default function Dashboard() {
 
     const [user, setUser] = useState(
-        JSON.parse(localStorage.getItem("user")) || null
+        JSON.parse(localStorage.getItem("user"))
     );
 
     useEffect(() => {
 
-        async function loadUser() {
+        async function load() {
 
-            try {
+            try{
 
                 const res = await getCurrentUser();
 
@@ -22,17 +31,38 @@ export default function Dashboard() {
 
             }
 
-            catch (err) {
-
-                console.log(err);
-
-            }
+            catch{}
 
         }
 
-        loadUser();
+        load();
 
     }, []);
+
+    const recentTrips = [
+
+        {
+            Trip:"TR-101",
+            Vehicle:"MH12AB1234",
+            Driver:"Rahul",
+            Status:"Completed"
+        },
+
+        {
+            Trip:"TR-102",
+            Vehicle:"MH12CD5678",
+            Driver:"Priya",
+            Status:"On Trip"
+        },
+
+        {
+            Trip:"TR-103",
+            Vehicle:"MH14EF9999",
+            Driver:"Amit",
+            Status:"Pending"
+        }
+
+    ];
 
     return (
 
@@ -40,97 +70,129 @@ export default function Dashboard() {
 
             <div className="mb-8">
 
-                <h1 className="text-3xl font-bold">
+                <h1 className="text-4xl font-bold">
 
-                    Welcome {user?.name || "Admin"}
+                    Welcome,
+
+                    <span className="text-blue-600">
+
+                        {" "}{user?.name}
+
+                    </span>
 
                 </h1>
 
-                <p className="text-gray-500">
+                <p className="text-gray-500 mt-2">
 
-                    {user?.role || "Administrator"}
+                    Fleet Overview
 
                 </p>
 
             </div>
 
-            <div className="grid grid-cols-4 gap-6">
+            <div className="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">
 
-                <KPIBox title="Active Vehicles" value="125" color="text-green-600" />
+                <KPIBox
 
-                <KPIBox title="Drivers On Duty" value="68" color="text-blue-600" />
+                    title="Vehicles"
 
-                <KPIBox title="Trips Today" value="42" color="text-orange-600" />
+                    value="128"
 
-                <KPIBox title="Fleet Utilization" value="82%" color="text-red-600" />
+                    icon={<Truck size={36}/>}
+
+                    color="text-blue-600"
+
+                />
+
+                <KPIBox
+
+                    title="Drivers"
+
+                    value="72"
+
+                    icon={<Users size={36}/>}
+
+                    color="text-green-600"
+
+                />
+
+                <KPIBox
+
+                    title="Trips Today"
+
+                    value="48"
+
+                    icon={<Route size={36}/>}
+
+                    color="text-orange-600"
+
+                />
+
+                <KPIBox
+
+                    title="Fleet Health"
+
+                    value="94%"
+
+                    icon={<Activity size={36}/>}
+
+                    color="text-red-600"
+
+                />
+
+            </div>
+
+            <div className="grid xl:grid-cols-2 gap-6 mt-8">
+
+                <Card title="Fleet Status">
+
+                    <div className="h-72 flex justify-center items-center text-gray-400">
+
+                        Chart will be added
+
+                    </div>
+
+                </Card>
+
+                <Card title="Vehicle Distribution">
+
+                    <div className="h-72 flex justify-center items-center text-gray-400">
+
+                        Pie Chart
+
+                    </div>
+
+                </Card>
 
             </div>
 
-            <div className="grid grid-cols-2 gap-6 mt-8">
+            <Card
 
-                <div className="bg-white rounded-xl shadow h-80 flex items-center justify-center">
+                title="Recent Trips"
 
-                    Fleet Status Chart
+                className="mt-8"
 
-                </div>
+            >
 
-                <div className="bg-white rounded-xl shadow h-80 flex items-center justify-center">
+                <Table
 
-                    Vehicle Distribution
+                    columns={[
 
-                </div>
+                        "Trip",
 
-            </div>
+                        "Vehicle",
 
-            <div className="bg-white rounded-xl shadow mt-8 p-6">
+                        "Driver",
 
-                <h2 className="text-xl font-bold mb-4">
+                        "Status"
 
-                    Recent Trips
+                    ]}
 
-                </h2>
+                    data={recentTrips}
 
-                <table className="w-full">
+                />
 
-                    <thead>
-
-                        <tr className="border-b">
-
-                            <th className="text-left py-3">Trip</th>
-
-                            <th>Vehicle</th>
-
-                            <th>Driver</th>
-
-                            <th>Status</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        <tr className="border-b">
-
-                            <td className="py-4">T-1001</td>
-
-                            <td>Van-05</td>
-
-                            <td>Alex</td>
-
-                            <td className="text-green-600">
-
-                                Completed
-
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
+            </Card>
 
         </>
 

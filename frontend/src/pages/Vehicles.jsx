@@ -1,188 +1,131 @@
-import DashboardLayout from "../layouts/DashboardLayout";
+import { useState } from "react";
 
-export default function Vehicles() {
+import Card from "../components/Card";
+import Button from "../components/Button";
+import SearchBar from "../components/SearchBar";
+import Table from "../components/Table";
 
-    return (
+export default function Vehicles(){
 
-        <DashboardLayout>
+    const [search,setSearch]=useState("");
+
+    const vehicles=[
+
+        {
+
+            ID:"VH001",
+
+            Vehicle:"Tata Ace",
+
+            Number:"MP07AA1234",
+
+            Status:"Available"
+
+        },
+
+        {
+
+            ID:"VH002",
+
+            Vehicle:"Ashok Leyland",
+
+            Number:"MP07BB5678",
+
+            Status:"On Trip"
+
+        },
+
+        {
+
+            ID:"VH003",
+
+            Vehicle:"Eicher Pro",
+
+            Number:"MP07CC8888",
+
+            Status:"In Shop"
+
+        }
+
+    ];
+
+    const filtered=vehicles.filter(v=>
+
+        v.Vehicle.toLowerCase().includes(
+
+            search.toLowerCase()
+
+        )
+
+    );
+
+    return(
+
+        <>
 
             <div className="flex justify-between items-center mb-6">
 
-                <h1 className="text-3xl font-bold">
+                <div>
 
-                    Vehicle Registry
+                    <h1 className="text-3xl font-bold">
 
-                </h1>
+                        Vehicles
 
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg">
+                    </h1>
+
+                    <p className="text-gray-500">
+
+                        Fleet Vehicle Management
+
+                    </p>
+
+                </div>
+
+                <Button className="w-auto">
 
                     + Add Vehicle
 
-                </button>
+                </Button>
 
             </div>
 
-            {/* Search */}
+            <div className="mb-6">
 
-            <div className="bg-white rounded-xl shadow p-4 mb-6">
+                <SearchBar
 
-                <input
-                    type="text"
-                    placeholder="Search by Vehicle Number..."
-                    className="w-full border rounded-lg px-4 py-2"
+                    value={search}
+
+                    onChange={(e)=>setSearch(e.target.value)}
+
+                    placeholder="Search Vehicle..."
+
                 />
 
             </div>
 
-            {/* Table */}
+            <Card>
 
-            <div className="bg-white rounded-xl shadow overflow-hidden">
+                <Table
 
-                <table className="w-full">
+                    columns={[
 
-                    <thead className="bg-gray-100">
+                        "ID",
 
-                        <tr>
+                        "Vehicle",
 
-                            <th className="text-left p-4">Vehicle No.</th>
+                        "Number",
 
-                            <th>Type</th>
+                        "Status"
 
-                            <th>Driver</th>
+                    ]}
 
-                            <th>Status</th>
+                    data={filtered}
 
-                            <th>Capacity</th>
+                />
 
-                            <th>Actions</th>
+            </Card>
 
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        <tr className="border-b hover:bg-gray-50">
-
-                            <td className="p-4">MH12AB1234</td>
-
-                            <td>Truck</td>
-
-                            <td>Raj Sharma</td>
-
-                            <td>
-
-                                <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full">
-
-                                    Available
-
-                                </span>
-
-                            </td>
-
-                            <td>8 Tons</td>
-
-                            <td>
-
-                                <button className="text-blue-600 mr-3">
-
-                                    Edit
-
-                                </button>
-
-                                <button className="text-red-600">
-
-                                    Delete
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                        <tr className="border-b hover:bg-gray-50">
-
-                            <td className="p-4">DL10XY5678</td>
-
-                            <td>Van</td>
-
-                            <td>Amit Kumar</td>
-
-                            <td>
-
-                                <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
-
-                                    On Trip
-
-                                </span>
-
-                            </td>
-
-                            <td>2 Tons</td>
-
-                            <td>
-
-                                <button className="text-blue-600 mr-3">
-
-                                    Edit
-
-                                </button>
-
-                                <button className="text-red-600">
-
-                                    Delete
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                        <tr className="hover:bg-gray-50">
-
-                            <td className="p-4">RJ20CD9087</td>
-
-                            <td>Bus</td>
-
-                            <td>Neha Jain</td>
-
-                            <td>
-
-                                <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full">
-
-                                    Maintenance
-
-                                </span>
-
-                            </td>
-
-                            <td>45 Seats</td>
-
-                            <td>
-
-                                <button className="text-blue-600 mr-3">
-
-                                    Edit
-
-                                </button>
-
-                                <button className="text-red-600">
-
-                                    Delete
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </DashboardLayout>
+        </>
 
     );
 
