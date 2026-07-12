@@ -5,27 +5,96 @@ export default function Button({
   className = "",
   onClick,
 }) {
+
+
   const styles = {
+
+
     primary:
-      "bg-blue-600 hover:bg-blue-700 text-white",
+      `
+      bg-gradient-to-r
+      from-blue-600
+      to-purple-600
+      hover:from-blue-700
+      hover:to-purple-700
+      text-white
+      shadow-blue-200
+      `,
+
 
     secondary:
-      "bg-gray-200 hover:bg-gray-300 text-gray-800",
+      `
+      bg-gradient-to-r
+      from-gray-100
+      to-gray-200
+      hover:from-gray-200
+      hover:to-gray-300
+      text-gray-800
+      `,
+
+
 
     danger:
-      "bg-red-600 hover:bg-red-700 text-white",
+      `
+      bg-gradient-to-r
+      from-red-500
+      to-pink-500
+      hover:from-red-600
+      hover:to-pink-600
+      text-white
+      shadow-red-200
+      `,
+
+
 
     success:
-      "bg-green-600 hover:bg-green-700 text-white",
+      `
+      bg-gradient-to-r
+      from-green-500
+      to-emerald-500
+      hover:from-green-600
+      hover:to-emerald-600
+      text-white
+      shadow-green-200
+      `,
+
   };
 
+
+
+
   return (
+
     <button
+
       type={type}
+
       onClick={onClick}
-      className={`px-5 py-3 rounded-xl font-semibold transition duration-200 shadow-sm ${styles[variant]} ${className}`}
+
+      className={`
+        px-6
+        py-3
+        rounded-2xl
+        font-semibold
+        transition-all
+        duration-300
+        shadow-lg
+        hover:scale-[1.03]
+        active:scale-95
+        flex
+        items-center
+        justify-center
+        gap-2
+        ${styles[variant]}
+        ${className}
+      `}
+
     >
+
       {children}
+
     </button>
+
   );
+
 }

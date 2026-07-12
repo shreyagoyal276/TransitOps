@@ -1,5 +1,6 @@
 import Card from "./Card";
 
+
 export default function KPIBox({
 
   title,
@@ -12,38 +13,116 @@ export default function KPIBox({
 
 }){
 
+
   return(
 
-    <Card className="hover:shadow-lg transition">
 
-      <div className="flex justify-between items-center">
+    <Card
+
+      className="
+      group
+      hover:-translate-y-1
+      transition-all
+      duration-300
+      "
+
+    >
+
+
+
+      <div
+
+        className="
+        flex
+        justify-between
+        items-center
+        "
+
+      >
+
+
+
+
 
         <div>
 
-          <p className="text-gray-500 text-sm">
+
+          <p
+
+            className="
+            text-gray-500
+            text-sm
+            font-medium
+            "
+
+          >
 
             {title}
 
           </p>
 
-          <h2 className={`text-4xl font-bold mt-3 ${color}`}>
+
+
+
+
+          <h2
+
+            className={`
+            text-4xl
+            font-extrabold
+            mt-3
+            tracking-tight
+            ${color}
+            `}
+
+          >
 
             {value}
 
           </h2>
 
+
+
         </div>
 
-        <div className={`${color} bg-gray-100 rounded-xl p-4`}>
+
+
+
+
+
+
+        <div
+
+          className={`
+          ${color}
+          bg-white
+          rounded-[1.5rem]
+          p-5
+          shadow-sm
+          border
+          border-gray-100
+          group-hover:scale-110
+          transition-all
+          duration-300
+          `}
+
+        >
 
           {icon}
 
+
         </div>
+
+
 
       </div>
 
+
+
     </Card>
 
+
   );
+
 
 }

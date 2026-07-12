@@ -4,7 +4,8 @@ import {
     Truck,
     Users,
     Route,
-    Activity
+    Activity,
+    Sparkles
 } from "lucide-react";
 
 import Card from "../components/Card";
@@ -23,7 +24,7 @@ export default function Dashboard() {
 
         async function load() {
 
-            try{
+            try {
 
                 const res = await getCurrentUser();
 
@@ -31,13 +32,14 @@ export default function Dashboard() {
 
             }
 
-            catch{}
+            catch {}
 
         }
 
         load();
 
     }, []);
+
 
     const recentTrips = [
 
@@ -64,33 +66,125 @@ export default function Dashboard() {
 
     ];
 
+
     return (
 
-        <>
+        <div className="relative overflow-hidden">
 
-            <div className="mb-8">
+            {/* Decorative pastel blobs */}
 
-                <h1 className="text-4xl font-bold">
+            <div className="
+                absolute -top-20 -right-20
+                w-72 h-72
+                bg-purple-200
+                rounded-full
+                blur-3xl
+                opacity-40
+            "/>
+
+
+            <div className="
+                absolute top-96 -left-32
+                w-80 h-80
+                bg-blue-200
+                rounded-full
+                blur-3xl
+                opacity-40
+            "/>
+
+
+
+            {/* Header */}
+
+            <div className="mb-10 relative">
+
+
+                <div className="
+                    flex items-center gap-3
+                    mb-3
+                ">
+
+                    <div className="
+                        p-3
+                        rounded-2xl
+                        bg-gradient-to-br
+                        from-purple-200
+                        to-blue-200
+                        text-purple-700
+                    ">
+
+                        <Sparkles size={25}/>
+
+                    </div>
+
+
+                    <p className="
+                        text-sm
+                        font-medium
+                        text-purple-600
+                    ">
+
+                        Fleet Management Dashboard
+
+                    </p>
+
+                </div>
+
+
+
+                <h1 className="
+                    text-5xl
+                    font-extrabold
+                    tracking-tight
+                    text-gray-800
+                ">
 
                     Welcome,
 
-                    <span className="text-blue-600">
+                    <span className="
+                        ml-3
+                        bg-gradient-to-r
+                        from-blue-600
+                        via-purple-600
+                        to-pink-500
+                        bg-clip-text
+                        text-transparent
+                    ">
 
-                        {" "}{user?.name}
+                        {user?.name}
 
                     </span>
 
                 </h1>
 
-                <p className="text-gray-500 mt-2">
 
-                    Fleet Overview
+                <p className="
+                    mt-3
+                    text-gray-500
+                    text-lg
+                ">
+
+                    Smart insights and real-time fleet overview
 
                 </p>
 
+
             </div>
 
-            <div className="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">
+
+
+
+
+            {/* KPI Cards */}
+
+            <div className="
+                grid
+                xl:grid-cols-4
+                md:grid-cols-2
+                grid-cols-1
+                gap-7
+            ">
+
 
                 <KPIBox
 
@@ -98,11 +192,14 @@ export default function Dashboard() {
 
                     value="128"
 
-                    icon={<Truck size={36}/>}
+                    icon={<Truck size={38}/>}
 
-                    color="text-blue-600"
+                    color="
+                    text-blue-600
+                    "
 
                 />
+
 
                 <KPIBox
 
@@ -110,11 +207,14 @@ export default function Dashboard() {
 
                     value="72"
 
-                    icon={<Users size={36}/>}
+                    icon={<Users size={38}/>}
 
-                    color="text-green-600"
+                    color="
+                    text-green-600
+                    "
 
                 />
+
 
                 <KPIBox
 
@@ -122,11 +222,14 @@ export default function Dashboard() {
 
                     value="48"
 
-                    icon={<Route size={36}/>}
+                    icon={<Route size={38}/>}
 
-                    color="text-orange-600"
+                    color="
+                    text-orange-600
+                    "
 
                 />
+
 
                 <KPIBox
 
@@ -134,67 +237,174 @@ export default function Dashboard() {
 
                     value="94%"
 
-                    icon={<Activity size={36}/>}
+                    icon={<Activity size={38}/>}
 
-                    color="text-red-600"
+                    color="
+                    text-red-600
+                    "
 
                 />
 
+
             </div>
 
-            <div className="grid xl:grid-cols-2 gap-6 mt-8">
+
+
+
+
+            {/* Charts */}
+
+            <div className="
+                grid
+                xl:grid-cols-2
+                gap-8
+                mt-10
+            ">
+
 
                 <Card title="Fleet Status">
 
-                    <div className="h-72 flex justify-center items-center text-gray-400">
 
-                        Chart will be added
+                    <div className="
+                        h-72
+                        rounded-[2rem]
+                        bg-gradient-to-br
+                        from-blue-50
+                        to-indigo-100
+                        flex
+                        items-center
+                        justify-center
+                        text-gray-400
+                        border
+                        border-blue-100
+                    ">
+
+                        <div className="text-center">
+
+                            <Activity
+                                className="
+                                mx-auto
+                                mb-3
+                                text-blue-400
+                                "
+                                size={40}
+                            />
+
+                            Chart will be added
+
+                        </div>
+
 
                     </div>
 
+
                 </Card>
+
+
+
+
 
                 <Card title="Vehicle Distribution">
 
-                    <div className="h-72 flex justify-center items-center text-gray-400">
 
-                        Pie Chart
+                    <div className="
+                        h-72
+                        rounded-[3rem]
+                        bg-gradient-to-br
+                        from-pink-50
+                        to-purple-100
+                        flex
+                        items-center
+                        justify-center
+                        text-gray-400
+                        border
+                        border-purple-100
+                    ">
+
+
+                        <div className="text-center">
+
+
+                            <Route
+
+                                className="
+                                mx-auto
+                                mb-3
+                                text-purple-400
+                                "
+
+                                size={40}
+
+                            />
+
+
+                            Pie Chart
+
+
+                        </div>
+
 
                     </div>
 
+
                 </Card>
+
 
             </div>
 
-            <Card
 
-                title="Recent Trips"
 
-                className="mt-8"
 
-            >
 
-                <Table
+            {/* Table */}
 
-                    columns={[
+            <div className="
+                mt-10
+                rounded-[2.5rem]
+                overflow-hidden
+            ">
 
-                        "Trip",
 
-                        "Vehicle",
+                <Card
 
-                        "Driver",
+                    title="Recent Trips"
 
-                        "Status"
+                    className="
+                    bg-white/80
+                    backdrop-blur-xl
+                    "
 
-                    ]}
+                >
 
-                    data={recentTrips}
 
-                />
+                    <Table
 
-            </Card>
+                        columns={[
 
-        </>
+                            "Trip",
+
+                            "Vehicle",
+
+                            "Driver",
+
+                            "Status"
+
+                        ]}
+
+
+                        data={recentTrips}
+
+
+                    />
+
+
+                </Card>
+
+
+            </div>
+
+
+        </div>
 
     );
 
