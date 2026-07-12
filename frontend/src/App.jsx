@@ -1,7 +1,28 @@
-import AppRoutes from "./routes/AppRoutes";
+import { Routes, Route } from "react-router-dom";
 
-export default function App() {
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 
-    return <AppRoutes/>;
+
+export default function App(){
+
+    return (
+
+        <Routes>
+
+            <Route
+                path="/"
+                element={<Login />}
+            />
+
+
+            <Route
+                path="/dashboard"
+                element={<Dashboard />}
+            />
+
+        </Routes>
+
+    );
 
 }

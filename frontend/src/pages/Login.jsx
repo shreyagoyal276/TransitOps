@@ -6,53 +6,120 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function Login() {
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const { setUser } = useContext(AuthContext);
+    const { setUser } = useContext(AuthContext);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [role, setRole] = useState(1);
+    const [email, setEmail] = useState("");
 
-  const handleLogin = async () => {
+    const [password, setPassword] = useState("");
 
-    try {
+    const [role, setRole] = useState(1);
 
-      const res = await login(email, password, role);
+    const handleLogin = async () => {
 
-      if (res.data.success) {
+        try {
 
-        setUser(res.data.user);
+            const res = await login(email, password, role);
+            console.log("LOGIN RESPONSE:", res.data);
+            if (res.data.success) {
 
-        navigate("/dashboard");
+                // Save JWT Token
+                localStorage.setItem("token", res.data.token);
 
-      } else {
+                // Save User
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify(res.data.user)
+                );
 
-        alert(res.data.message);
+                // Update Context
+                setUser(res.data.user);
 
-      }
+                // Redirect
+                navigate("/dashboard");
 
-    } catch (err) {
+            } else {
 
-      alert("Server Error");
+                alert(res.data.message);
 
-      console.log(err);
+            }
 
-    }
+        } catch (err) {
 
-  };
+            alert(
+                err.response?.data?.message || "Server Error"
+            );
 
-  return (
-    <div>
+            console.log(err);
 
-      {/* Your existing UI */}
+        }
 
-      <button onClick={handleLogin}>
+    };
 
-        Login
+    return (
 
-      </button>
+    <div
+        style={{
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            background: "#f4f6f9"
+        }}
+    >
+
+        <div
+            style={{
+                width: "350px",
+                padding: "30px",
+                background: "#fff",
+                borderRadius: "10px",
+                boxShadow: "0 0 10px rgba(0,0,0,0.1)"
+            }}
+        >
+
+            <h2>TransitOps Login</h2>
+
+            <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                style={{
+                    width: "100%",
+                    padding: "10px",
+                    marginBottom: "15px"
+                }}
+            />
+
+            <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                style={{
+                    width: "100%",
+                    padding: "10px",
+                    marginBottom: "20px"
+                }}
+            />
+
+            <button
+                onClick={handleLogin}
+                style={{
+                    width: "100%",
+                    padding: "10px",
+                    cursor: "pointer"
+                }}
+            >
+                Login
+            </button>
+
+        </div>
 
     </div>
-  );
+
+);
+
 }

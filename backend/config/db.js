@@ -1,31 +1,27 @@
-const mysql = require("mysql2");
+const mongoose = require("mongoose");
 
-const db = mysql.createPool({
 
-    host: process.env.DB_HOST,
+const connectDB = async () => {
 
-    user: process.env.DB_USER,
+    try {
 
-    password: process.env.DB_PASSWORD,
+        await mongoose.connect(process.env.MONGO_URI);
 
-    database: process.env.DB_NAME
-
-});
-
-db.getConnection((err, connection) => {
-
-    if (err) {
-
-        console.log(err);
-
-        return;
+        console.log("MongoDB Atlas Connected");
 
     }
 
-    console.log("MySQL Connected");
+    catch(error){
 
-    connection.release();
+        console.log("MongoDB Connection Failed");
 
-});
+        console.log(error.message);
 
-module.exports = db;
+        process.exit(1);
+
+    }
+
+};
+
+
+module.exports = connectDB;

@@ -1,26 +1,36 @@
 const express = require("express");
+
 const router = express.Router();
 
 const auth = require("../middleware/auth");
 
 
-// Dashboard API
 
 router.get("/", auth, (req,res)=>{
 
 
     res.json({
 
+        success:true,
+
         message:"Dashboard Data",
 
+
         user:{
+
             id:req.user.id,
+
             name:req.user.name,
-            role:req.user.role
+
+            role:req.user.role,
+
+            email:req.user.email
+
         },
 
 
         modules:[
+
 
             {
                 name:"Vehicles",
@@ -72,9 +82,7 @@ router.get("/", auth, (req,res)=>{
 
         ]
 
-
     });
-
 
 
 });

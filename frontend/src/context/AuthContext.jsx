@@ -4,11 +4,30 @@ export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
 
-  const [user, setUser] = useState(null);
+    const [user, setUser] = useState(
 
-  return (
-    <AuthContext.Provider value={{ user, setUser }}>
-      {children}
-    </AuthContext.Provider>
-  );
+        JSON.parse(localStorage.getItem("user")) || null
+
+    );
+
+    return (
+
+        <AuthContext.Provider
+
+            value={{
+
+                user,
+
+                setUser
+
+            }}
+
+        >
+
+            {children}
+
+        </AuthContext.Provider>
+
+    );
+
 }
