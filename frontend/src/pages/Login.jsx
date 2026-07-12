@@ -1,125 +1,87 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+
+import { useNavigate, Link } from "react-router-dom";
 
 import { login } from "../services/authService";
+
 import { AuthContext } from "../context/AuthContext";
 
 export default function Login() {
 
     const navigate = useNavigate();
 
-    const { setUser } = useContext(AuthContext);
+    const { login: saveLogin } = useContext(AuthContext);
 
     const [email, setEmail] = useState("");
 
     const [password, setPassword] = useState("");
 
-    const [role, setRole] = useState(1);
+    async function handleLogin(e) {
 
-    const handleLogin = async () => {
+        e.preventDefault();
 
         try {
 
-            const res = await login(email, password, role);
-            console.log("LOGIN RESPONSE:", res.data);
-            if (res.data.success) {
+            const res = await login(email, password);
 
-                // Save JWT Token
-                localStorage.setItem("token", res.data.token);
+            saveLogin(
 
-                // Save User
-                localStorage.setItem(
-                    "user",
-                    JSON.stringify(res.data.user)
-                );
+                res.data.user,
 
-                // Update Context
-                setUser(res.data.user);
+                res.data.token
 
-                // Redirect
-                navigate("/dashboard");
-
-            } else {
-
-                alert(res.data.message);
-
-            }
-
-        } catch (err) {
-
-            alert(
-                err.response?.data?.message || "Server Error"
             );
 
-            console.log(err);
+            navigate("/dashboard");
 
         }
 
-    };
+        catch (err) {
+
+            alert(err.response?.data?.message || "Login Failed");
+
+        }
+
+    }
 
     return (
 
-    <div
-        style={{
-            height: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            background: "#f4f6f9"
-        }}
-    >
+        <form onSubmit={handleLogin}>
 
-        <div
-            style={{
-                width: "350px",
-                padding: "30px",
-                background: "#fff",
-                borderRadius: "10px",
-                boxShadow: "0 0 10px rgba(0,0,0,0.1)"
-            }}
-        >
-
-            <h2>TransitOps Login</h2>
+            {/* Keep your existing UI */}
 
             <input
-                type="email"
-                placeholder="Email"
+
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                style={{
-                    width: "100%",
-                    padding: "10px",
-                    marginBottom: "15px"
-                }}
+
+                onChange={(e)=>setEmail(e.target.value)}
+
             />
 
             <input
+
                 type="password"
-                placeholder="Password"
+
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                style={{
-                    width: "100%",
-                    padding: "10px",
-                    marginBottom: "20px"
-                }}
+
+                onChange={(e)=>setPassword(e.target.value)}
+
             />
 
-            <button
-                onClick={handleLogin}
-                style={{
-                    width: "100%",
-                    padding: "10px",
-                    cursor: "pointer"
-                }}
-            >
+            <button>
+
                 Login
+
             </button>
 
-        </div>
+            <Link to="/register">
 
-    </div>
+                Create Account
 
-);
+            </Link>
+
+        </form>
+
+    );
 
 }

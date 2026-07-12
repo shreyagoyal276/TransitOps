@@ -12,6 +12,7 @@ import Maintenance from "../pages/Maintenance";
 import FuelExpenses from "../pages/FuelExpenses";
 import Analytics from "../pages/Analytics";
 import Settings from "../pages/Settings";
+import Register from "../pages/Register";
 
 export default function AppRoutes() {
 
@@ -19,11 +20,20 @@ export default function AppRoutes() {
 
         <Routes>
 
+        
+
             <Route
                 path="/"
                 element={<Login />}
             />
 
+              <Route
+
+              path="/register"
+
+              element={<Register />}
+
+          />
             <Route
                 path="/dashboard"
                 element={<DashboardLayout />}

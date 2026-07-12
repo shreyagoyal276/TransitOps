@@ -10,6 +10,34 @@ export default function AuthProvider({ children }) {
 
     );
 
+    const [token, setToken] = useState(
+
+        localStorage.getItem("token") || ""
+
+    );
+
+    const login = (userData, jwt) => {
+
+        localStorage.setItem("user", JSON.stringify(userData));
+
+        localStorage.setItem("token", jwt);
+
+        setUser(userData);
+
+        setToken(jwt);
+
+    };
+
+    const logout = () => {
+
+        localStorage.clear();
+
+        setUser(null);
+
+        setToken("");
+
+    };
+
     return (
 
         <AuthContext.Provider
@@ -18,7 +46,11 @@ export default function AuthProvider({ children }) {
 
                 user,
 
-                setUser
+                token,
+
+                login,
+
+                logout
 
             }}
 

@@ -4,88 +4,70 @@ const router = express.Router();
 
 const auth = require("../middleware/auth");
 
-
-
-router.get("/", auth, (req,res)=>{
-
+router.get("/", auth, (req, res) => {
 
     res.json({
 
-        success:true,
+        success: true,
 
-        message:"Dashboard Data",
+        user: req.user,
 
-
-        user:{
-
-            id:req.user.id,
-
-            name:req.user.name,
-
-            role:req.user.role,
-
-            email:req.user.email
-
-        },
-
-
-        modules:[
-
+        modules: [
 
             {
-                name:"Vehicles",
-                icon:"bi-truck-front",
-                description:"Manage fleet vehicles",
-                link:"/vehicles"
+
+                name: "Vehicles",
+
+                description: "Manage Fleet",
+
+                link: "/dashboard/vehicles"
+
             },
 
-
             {
-                name:"Drivers",
-                icon:"bi-person-badge",
-                description:"Manage driver details",
-                link:"/drivers"
+
+                name: "Drivers",
+
+                description: "Manage Drivers",
+
+                link: "/dashboard/drivers"
+
             },
 
-
             {
-                name:"Trips",
-                icon:"bi-map",
-                description:"Track ongoing trips",
-                link:"/trips"
+
+                name: "Trips",
+
+                description: "Manage Trips",
+
+                link: "/dashboard/trips"
+
             },
 
-
             {
-                name:"Maintenance",
-                icon:"bi-tools",
-                description:"Vehicle maintenance records",
-                link:"/maintenance"
+
+                name: "Maintenance",
+
+                description: "Maintenance Records",
+
+                link: "/dashboard/maintenance"
+
             },
 
-
             {
-                name:"Fuel",
-                icon:"bi-fuel-pump",
-                description:"Fuel consumption tracking",
-                link:"/fuel"
-            },
 
+                name: "Fuel",
 
-            {
-                name:"Expenses",
-                icon:"bi-cash-stack",
-                description:"Manage operational expenses",
-                link:"/expenses"
+                description: "Fuel Expenses",
+
+                link: "/dashboard/fuel"
+
             }
-
 
         ]
 
     });
 
-
 });
-
 
 module.exports = router;
