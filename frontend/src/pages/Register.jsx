@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { register } from "../services/authService";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Register() {
 
@@ -19,6 +21,8 @@ export default function Register() {
         role: "fleet_manager"
 
     });
+
+    const { login } = useContext(AuthContext);
 
     const handleChange = (e) => {
 
@@ -40,9 +44,15 @@ export default function Register() {
 
             const res = await register(form);
 
-            alert(res.data.message);
+            login(
 
-            navigate("/");
+                res.data.user,
+
+                res.data.token
+
+            );
+
+            navigate("/dashboard");
 
         }
 

@@ -10,33 +10,37 @@ export default function AuthProvider({ children }) {
 
     );
 
-    const [token, setToken] = useState(
+    const login = (userData, token) => {
 
-        localStorage.getItem("token") || ""
+        localStorage.setItem(
 
-    );
+            "user",
 
-    const login = (userData, jwt) => {
+            JSON.stringify(userData)
 
-        localStorage.setItem("user", JSON.stringify(userData));
+        );
 
-        localStorage.setItem("token", jwt);
+        localStorage.setItem(
+
+            "token",
+
+            token
+
+        );
 
         setUser(userData);
-
-        setToken(jwt);
 
     };
 
     const logout = () => {
 
-        localStorage.clear();
+    localStorage.removeItem("token");
 
-        setUser(null);
+    localStorage.removeItem("user");
 
-        setToken("");
+    setUser(null);
 
-    };
+};
 
     return (
 
@@ -45,8 +49,6 @@ export default function AuthProvider({ children }) {
             value={{
 
                 user,
-
-                token,
 
                 login,
 

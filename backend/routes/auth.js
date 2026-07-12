@@ -82,25 +82,51 @@ router.post("/register", async (req, res) => {
         });
 
 
-        res.status(201).json({
+        const token = jwt.sign(
 
-            success: true,
+    {
 
-            message: "Registration Successful",
+        id: user._id,
 
-            user: {
+        name: user.name,
 
-                id: user._id,
+        email: user.email,
 
-                name: user.name,
+        role: user.role
 
-                email: user.email,
+    },
 
-                role: user.role
+    process.env.JWT_SECRET,
 
-            }
+    {
 
-        });
+        expiresIn: "2h"
+
+    }
+
+);
+
+res.status(201).json({
+
+    success: true,
+
+    message: "Registration Successful",
+
+    token,
+
+    user: {
+
+        id: user._id,
+
+        name: user.name,
+
+        email: user.email,
+
+        role: user.role
+
+    }
+
+});
 
     }
 

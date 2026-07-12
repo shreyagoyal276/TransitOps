@@ -12,7 +12,8 @@ import Maintenance from "../pages/Maintenance";
 import FuelExpenses from "../pages/FuelExpenses";
 import Analytics from "../pages/Analytics";
 import Settings from "../pages/Settings";
-import Register from "../pages/Register";
+
+import ProtectedRoute from "../components/ProtectedRoute";
 
 export default function AppRoutes() {
 
@@ -20,70 +21,162 @@ export default function AppRoutes() {
 
         <Routes>
 
-        
+            {/* Login */}
 
             <Route
+
                 path="/"
+
                 element={<Login />}
+
             />
 
-              <Route
+            {/* Protected Dashboard */}
 
-              path="/register"
-
-              element={<Register />}
-
-          />
             <Route
+
                 path="/dashboard"
-                element={<DashboardLayout />}
+
+                element={
+
+                    <ProtectedRoute>
+
+                        <DashboardLayout />
+
+                    </ProtectedRoute>
+
+                }
+
             >
 
                 <Route
+
                     index
+
                     element={<Dashboard />}
+
                 />
 
                 <Route
+
                     path="vehicles"
-                    element={<Vehicles />}
+
+                    element={
+
+                        <ProtectedRoute>
+
+                            <Vehicles />
+
+                        </ProtectedRoute>
+
+                    }
+
                 />
 
                 <Route
+
                     path="drivers"
-                    element={<Drivers />}
+
+                    element={
+
+                        <ProtectedRoute>
+
+                            <Drivers />
+
+                        </ProtectedRoute>
+
+                    }
+
                 />
 
                 <Route
+
                     path="trips"
-                    element={<Trips />}
+
+                    element={
+
+                        <ProtectedRoute>
+
+                            <Trips />
+
+                        </ProtectedRoute>
+
+                    }
+
                 />
 
                 <Route
+
                     path="maintenance"
-                    element={<Maintenance />}
+
+                    element={
+
+                        <ProtectedRoute>
+
+                            <Maintenance />
+
+                        </ProtectedRoute>
+
+                    }
+
                 />
 
                 <Route
+
                     path="fuel"
-                    element={<FuelExpenses />}
+
+                    element={
+
+                        <ProtectedRoute>
+
+                            <FuelExpenses />
+
+                        </ProtectedRoute>
+
+                    }
+
                 />
 
                 <Route
+
                     path="analytics"
-                    element={<Analytics />}
+
+                    element={
+
+                        <ProtectedRoute>
+
+                            <Analytics />
+
+                        </ProtectedRoute>
+
+                    }
+
                 />
 
                 <Route
+
                     path="settings"
-                    element={<Settings />}
+
+                    element={
+
+                        <ProtectedRoute>
+
+                            <Settings />
+
+                        </ProtectedRoute>
+
+                    }
+
                 />
 
             </Route>
 
             <Route
+
                 path="*"
+
                 element={<Navigate to="/" replace />}
+
             />
 
         </Routes>
