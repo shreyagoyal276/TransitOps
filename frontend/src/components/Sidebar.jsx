@@ -21,37 +21,37 @@ const menu = [
   {
     title: "Vehicles",
     icon: Truck,
-    path: "/vehicles",
+    path: "/dashboard/vehicles",
   },
   {
     title: "Drivers",
     icon: Users,
-    path: "/drivers",
+    path: "/dashboard/drivers",
   },
   {
     title: "Trips",
     icon: Route,
-    path: "/trips",
+    path: "/dashboard/trips",
   },
   {
     title: "Maintenance",
     icon: Wrench,
-    path: "/maintenance",
+    path: "/dashboard/maintenance",
   },
   {
     title: "Fuel & Expenses",
     icon: Fuel,
-    path: "/fuel",
+    path: "/dashboard/fuel",
   },
   {
     title: "Analytics",
     icon: BarChart3,
-    path: "/analytics",
+    path: "/dashboard/analytics",
   },
   {
     title: "Settings",
     icon: Settings,
-    path: "/settings",
+    path: "/dashboard/settings",
   },
 ];
 

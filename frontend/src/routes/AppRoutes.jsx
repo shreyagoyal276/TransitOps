@@ -1,141 +1,82 @@
+import { Routes, Route, Navigate } from "react-router-dom";
+
+import Login from "../pages/Login";
+
 import DashboardLayout from "../layouts/DashboardLayout";
 
-import KPIBox from "../components/KPIBox";
-import { useEffect, useState } from "react";
-import { getCurrentUser } from "../services/authService";
+import Dashboard from "../pages/Dashboard";
+import Vehicles from "../pages/Vehicles";
+import Drivers from "../pages/Drivers";
+import Trips from "../pages/Trips";
+import Maintenance from "../pages/Maintenance";
+import FuelExpenses from "../pages/FuelExpenses";
+import Analytics from "../pages/Analytics";
+import Settings from "../pages/Settings";
 
-
-const [user, setUser] = useState(null);
-
-useEffect(() => {
-
-    async function loadUser() {
-
-        try{
-
-            const res = await getCurrentUser();
-
-            setUser(res.data.user);
-
-        }
-
-        catch(err){
-
-            console.log(err);
-
-        }
-
-    }
-
-    loadUser();
-
-},[]);
-
-export default function Dashboard() {
+export default function AppRoutes() {
 
     return (
 
-        <DashboardLayout>
+        <Routes>
 
-            <div className="grid grid-cols-4 gap-6">
+            <Route
+                path="/"
+                element={<Login />}
+            />
 
-                <KPIBox
-                    title="Active Vehicles"
-                    value="125"
-                    color="text-green-600"
+            <Route
+                path="/dashboard"
+                element={<DashboardLayout />}
+            >
+
+                <Route
+                    index
+                    element={<Dashboard />}
                 />
 
-                <KPIBox
-                    title="Drivers On Duty"
-                    value="68"
-                    color="text-blue-600"
+                <Route
+                    path="vehicles"
+                    element={<Vehicles />}
                 />
 
-                <KPIBox
-                    title="Trips Today"
-                    value="42"
-                    color="text-orange-600"
+                <Route
+                    path="drivers"
+                    element={<Drivers />}
                 />
 
-                <KPIBox
-                    title="Fleet Utilization"
-                    value="82%"
-                    color="text-red-600"
+                <Route
+                    path="trips"
+                    element={<Trips />}
                 />
 
-            </div>
+                <Route
+                    path="maintenance"
+                    element={<Maintenance />}
+                />
 
-            <div className="grid grid-cols-2 gap-6 mt-8">
+                <Route
+                    path="fuel"
+                    element={<FuelExpenses />}
+                />
 
-                <div className="bg-white rounded-xl shadow h-80 flex justify-center items-center">
+                <Route
+                    path="analytics"
+                    element={<Analytics />}
+                />
 
-                    Fleet Status Chart
+                <Route
+                    path="settings"
+                    element={<Settings />}
+                />
 
-                </div>
+            </Route>
 
-                <div className="bg-white rounded-xl shadow h-80 flex justify-center items-center">
+            <Route
+                path="*"
+                element={<Navigate to="/" replace />}
+            />
 
-                    Vehicle Distribution
-
-                </div>
-
-            </div>
-
-            <div className="bg-white rounded-xl shadow mt-8 p-6">
-
-                <h2 className="text-xl font-bold mb-4">
-
-                    Recent Trips
-
-                </h2>
-
-                <table className="w-full">
-
-                    <thead>
-
-                        <tr className="border-b">
-
-                            <th className="text-left py-3">Trip</th>
-
-                            <th>Vehicle</th>
-
-                            <th>Driver</th>
-
-                            <th>Status</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        <tr className="border-b">
-
-                            <td className="py-4">
-
-                                T-1001
-
-                            </td>
-
-                            <td>Van-05</td>
-
-                            <td>Alex</td>
-
-                            <td className="text-green-600">
-
-                                Completed
-
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </DashboardLayout>
+        </Routes>
 
     );
 

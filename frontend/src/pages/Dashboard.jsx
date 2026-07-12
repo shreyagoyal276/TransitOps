@@ -1,110 +1,138 @@
 import { useEffect, useState } from "react";
 
+import KPIBox from "../components/KPIBox";
+
 import { getCurrentUser } from "../services/authService";
 
+export default function Dashboard() {
 
-export default function Dashboard(){
+    const [user, setUser] = useState(
+        JSON.parse(localStorage.getItem("user")) || null
+    );
 
-    const [data,setData] = useState(null);
+    useEffect(() => {
 
+        async function loadUser() {
 
-    useEffect(()=>{
-
-
-        async function loadDashboard(){
-
-
-            try{
-
+            try {
 
                 const res = await getCurrentUser();
 
-
-                setData(res.data);
-
+                setUser(res.data.user);
 
             }
 
-            catch(error){
+            catch (err) {
 
-    console.log(error);
+                console.log(err);
 
-    localStorage.clear();
-
-    window.location.href="/";
-
-}
-
+            }
 
         }
 
+        loadUser();
 
-        loadDashboard();
-
-
-    },[]);
-
-
-
-    if(!data){
-
-        return <h2>Loading...</h2>;
-
-    }
-
-
+    }, []);
 
     return (
 
-        <div>
+        <>
 
+            <div className="mb-8">
 
-            <h1>
+                <h1 className="text-3xl font-bold">
 
-                Welcome {data.user.name}
+                    Welcome {user?.name || "Admin"}
 
-            </h1>
+                </h1>
 
+                <p className="text-gray-500">
 
-            <p>
+                    {user?.role || "Administrator"}
 
-                Role: {data.user.role}
+                </p>
 
-            </p>
+            </div>
 
+            <div className="grid grid-cols-4 gap-6">
 
-            <hr/>
+                <KPIBox title="Active Vehicles" value="125" color="text-green-600" />
 
+                <KPIBox title="Drivers On Duty" value="68" color="text-blue-600" />
 
-            {
+                <KPIBox title="Trips Today" value="42" color="text-orange-600" />
 
-                data.modules.map((module)=>(
+                <KPIBox title="Fleet Utilization" value="82%" color="text-red-600" />
 
-                    <div key={module.name}>
+            </div>
 
+            <div className="grid grid-cols-2 gap-6 mt-8">
 
-                        <h2>
+                <div className="bg-white rounded-xl shadow h-80 flex items-center justify-center">
 
-                            {module.name}
+                    Fleet Status Chart
 
-                        </h2>
+                </div>
 
+                <div className="bg-white rounded-xl shadow h-80 flex items-center justify-center">
 
-                        <p>
+                    Vehicle Distribution
 
-                            {module.description}
+                </div>
 
-                        </p>
+            </div>
 
+            <div className="bg-white rounded-xl shadow mt-8 p-6">
 
-                    </div>
+                <h2 className="text-xl font-bold mb-4">
 
-                ))
+                    Recent Trips
 
-            }
+                </h2>
 
+                <table className="w-full">
 
-        </div>
+                    <thead>
+
+                        <tr className="border-b">
+
+                            <th className="text-left py-3">Trip</th>
+
+                            <th>Vehicle</th>
+
+                            <th>Driver</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr className="border-b">
+
+                            <td className="py-4">T-1001</td>
+
+                            <td>Van-05</td>
+
+                            <td>Alex</td>
+
+                            <td className="text-green-600">
+
+                                Completed
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </>
 
     );
 
