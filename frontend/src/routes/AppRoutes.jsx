@@ -1,27 +1,142 @@
-import { Routes, Route } from "react-router-dom";
+import DashboardLayout from "../layouts/DashboardLayout";
 
-import Login from "../pages/Login";
-import Dashboard from "../pages/Dashboard";
-import Vehicles from "../pages/Vehicles";
-import Drivers from "../pages/Drivers";
-import Trips from "../pages/Trips";
-import Maintenance from "../pages/Maintenance";
-import FuelExpenses from "../pages/FuelExpenses";
-import Analytics from "../pages/Analytics";
-import Settings from "../pages/Settings";
+import KPIBox from "../components/KPIBox";
+import { useEffect, useState } from "react";
+import { getCurrentUser } from "../services/authService";
 
-export default function AppRoutes() {
-  return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/vehicles" element={<Vehicles />} />
-      <Route path="/drivers" element={<Drivers />} />
-      <Route path="/trips" element={<Trips />} />
-      <Route path="/maintenance" element={<Maintenance />} />
-      <Route path="/fuel" element={<FuelExpenses />} />
-      <Route path="/analytics" element={<Analytics />} />
-      <Route path="/settings" element={<Settings />} />
-    </Routes>
-  );
+
+const [user, setUser] = useState(null);
+
+useEffect(() => {
+
+    async function loadUser() {
+
+        try{
+
+            const res = await getCurrentUser();
+
+            setUser(res.data.user);
+
+        }
+
+        catch(err){
+
+            console.log(err);
+
+        }
+
+    }
+
+    loadUser();
+
+},[]);
+
+export default function Dashboard() {
+
+    return (
+
+        <DashboardLayout>
+
+            <div className="grid grid-cols-4 gap-6">
+
+                <KPIBox
+                    title="Active Vehicles"
+                    value="125"
+                    color="text-green-600"
+                />
+
+                <KPIBox
+                    title="Drivers On Duty"
+                    value="68"
+                    color="text-blue-600"
+                />
+
+                <KPIBox
+                    title="Trips Today"
+                    value="42"
+                    color="text-orange-600"
+                />
+
+                <KPIBox
+                    title="Fleet Utilization"
+                    value="82%"
+                    color="text-red-600"
+                />
+
+            </div>
+
+            <div className="grid grid-cols-2 gap-6 mt-8">
+
+                <div className="bg-white rounded-xl shadow h-80 flex justify-center items-center">
+
+                    Fleet Status Chart
+
+                </div>
+
+                <div className="bg-white rounded-xl shadow h-80 flex justify-center items-center">
+
+                    Vehicle Distribution
+
+                </div>
+
+            </div>
+
+            <div className="bg-white rounded-xl shadow mt-8 p-6">
+
+                <h2 className="text-xl font-bold mb-4">
+
+                    Recent Trips
+
+                </h2>
+
+                <table className="w-full">
+
+                    <thead>
+
+                        <tr className="border-b">
+
+                            <th className="text-left py-3">Trip</th>
+
+                            <th>Vehicle</th>
+
+                            <th>Driver</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr className="border-b">
+
+                            <td className="py-4">
+
+                                T-1001
+
+                            </td>
+
+                            <td>Van-05</td>
+
+                            <td>Alex</td>
+
+                            <td className="text-green-600">
+
+                                Completed
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </DashboardLayout>
+
+    );
+
 }
