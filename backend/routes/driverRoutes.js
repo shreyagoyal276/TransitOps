@@ -12,28 +12,17 @@ router.get("/", async(req,res)=>{
 
     try{
 
-
         const drivers = await Driver.find();
 
-
-        res.status(200).json(drivers);
-
-
+        res.json(drivers);
 
     }
 
     catch(err){
 
-
-        console.log("GET DRIVER ERROR:",err);
-
-
         res.status(500).json({
-
             message:err.message
-
         });
-
 
     }
 
@@ -42,10 +31,7 @@ router.get("/", async(req,res)=>{
 
 
 
-
-
-
-// CREATE DRIVER
+// ADD DRIVER
 
 router.post("/", async(req,res)=>{
 
@@ -53,54 +39,40 @@ router.post("/", async(req,res)=>{
     try{
 
 
-        console.log("Incoming Driver:",req.body);
-
-
-
-        const driver = await Driver.create({
-
+        const driver = new Driver({
 
             name:req.body.name,
 
-
             license:req.body.license,
-
 
             phone:req.body.phone,
 
-
             status:req.body.status
-
 
         });
 
 
 
-        res.status(201).json(driver);
+        const savedDriver = await driver.save();
+
+
+
+        res.status(201).json(savedDriver);
 
 
 
     }
 
-
     catch(err){
 
-
-        console.log("ADD DRIVER ERROR:",err);
-
-
         res.status(500).json({
-
             message:err.message
-
         });
-
 
     }
 
 
 });
-
 
 
 
