@@ -1,7 +1,19 @@
+import DashboardLayout from "../layouts/DashboardLayout";
+
 export default function Vehicles() {
-  return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold">Vehicles</h1>
-    </div>
-  );
+
+    return (
+
+        <DashboardLayout>
+
+            <h1 className="text-3xl font-bold">
+
+                Vehicle Registry
+
+            </h1>
+
+        </DashboardLayout>
+
+    );
+
 }
